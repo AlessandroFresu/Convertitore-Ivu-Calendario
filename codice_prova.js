@@ -55,6 +55,7 @@
             //Imposto l'ora di inizio dormita:
             InfoGiornoSingolo[nomeInizioTurno] = GiorniDelMese[i-1].nomeInizioTurno;
 
+            
 
         }
         else if(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].classList.contains("click-area")){
