@@ -62,16 +62,17 @@
             //Giorno libero
             if (GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].classList.contains("type_offday")) {
                 InfoGiornoSingolo[nomeTipo] = "Libero";
-
+                InfoGiornoSingolo[nomeDataFine] = InfoGiornoSingolo[nomeData];
                 InfoGiornoSingolo[nomeTuttoIlGiono] = "TRUE";
             } else if(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].classList.contains("singleduty")){
                 //Lavoro
                 InfoGiornoSingolo[nomeTipo] = "Lavoro";
                 InfoGiornoSingolo[nomeTuttoIlGiono] = "FALSE";
                 //Determino gli orari di inizio e di fine turno
-
                 InfoGiornoSingolo[nomeInizioTurno] = tConvert(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].getElementsByClassName("time-location-info")[0].getElementsByTagName("span")[0].innerText);
                 InfoGiornoSingolo[nomeFineTurno] = tConvert(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].getElementsByClassName("time-location-info")[1].getElementsByTagName("span")[0].innerText);
+                //Imposto come data di fine dell'evento la stessa data di inzio:
+                InfoGiornoSingolo[nomeDataFine] = GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("day-info")[0].getElementsByClassName("date")[0].innerHTML;
             }
 
         }
