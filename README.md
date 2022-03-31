@@ -12,7 +12,7 @@ Si accede agli strumenti sviluppatore del browser, si clicca su "console" e si i
 1. Vengono inseriti nel file 35 elementi, quindi tutta la pagina visualizzata
 2.	Gli RFR, i giorni di lavoro singoli, i giorni di riposo (indipendentemente dal tipo) vengono associati correttamente **MA** le altre tipologie di giornate (malattia, recupero, festività) non vengono trattate in maniera esplicita il che significa che non verranno inserite nel calendario.
 3.	Non vengono inseriti i nomi delle giornate
-4.	Codice poco "elegante", presenti dati hardcoded.
+4.	Codice poco "elegante", ~~presenti dati hardcoded~~.
 6. Segnalate eventuali malfunzionamenti
 
 
