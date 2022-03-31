@@ -28,7 +28,8 @@
     for (let i = 0; i < GiorniDelMese.length; i++) {
         let InfoGiornoSingolo = {}; //Oggetto da salvare
 
-        var nomeData = "StartDate"; //Campo Data
+        var nomeDataInizio = "StartDate"; //Campo Data Inizio
+        var nomeDataFine = "EndDate"; // Campo Data Fine turno
         var nomeTipo = "Subject"; //Campo tipologia
         var nomeInizioTurno = "InizioTurno"; //campo Inizio Turno
         var nomeFineTurno = "FineTurno"; //Campo Fine Turno
@@ -37,14 +38,20 @@
         //Recupero i dati che mi servono:
 
         //Data della giornata
-        InfoGiornoSingolo[nomeData] = GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("day-info")[0].getElementsByClassName("date")[0].innerHTML
+        InfoGiornoSingolo[nomeDataInizio] = GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("day-info")[0].getElementsByClassName("date")[0].innerHTML
 
         //Tipologia giornata
 
         if(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].classList.contains("disable")){
             InfoGiornoSingolo[nomeTipo] = "Smontante dormita";
             InfoGiornoSingolo[nomeTuttoIlGiono] = "FALSE";
-            //La dormita inizia alle 00:00 del giorno
+            //La dormita inizia il giorno prima
+            var GiornoPrima = GiorniDelMese[i-1];
+            //Salvo la data di inizio
+            InfoGiornoSingolo[nomeDataInizio] = GiornoPrima[nomeDataInizio];
+            //Inizio Turno
+            InfoGiornoSingolo[nomeInizioTurno] = tConvert(GiornoPrima.getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].getElementsByClassName("time-location-info")[0].getElementsByTagName("span")[0].innerText);
+
             temp = "00:00 AM"; //HARD CODED
             InfoGiornoSingolo[nomeInizioTurno] = temp;
 
