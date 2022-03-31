@@ -43,19 +43,18 @@
         //Tipologia giornata
 
         if(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].classList.contains("disable")){
-            InfoGiornoSingolo[nomeTipo] = "Smontante dormita";
-            InfoGiornoSingolo[nomeTuttoIlGiono] = "FALSE";
-            //La dormita inizia alle 00:00 del giorno
-            temp = "00:00 AM"; //HARD CODED
-            InfoGiornoSingolo[nomeInizioTurno] = temp;
-
-            //INSERIRE ORA DI FINE DORMITA
 
             //Accedo al giorno precedente:
-            var GiornoPrima = GiorniDelMese[i-1];
+            temp = InfoMese[i-1];
+            //Imposto la data di inizio dormita:
+            InfoGiornoSingolo[nomeDataFine] = temp.nomeData;
+            //Imposto la data di fine dormita:
+            temp[nomeDataFine] = InfoGiornoSingolo[nomeData];
+            //Imposto l'ora di fine dormita:
+            temp[nomeFineTurno]= tConvert(removeLastChar(GiorniDelMese[i-1].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].getElementsByClassName("time-location-info")[1].getElementsByTagName("span")[0].innerText));
+            //Imposto l'ora di inizio dormita:
+            InfoGiornoSingolo[nomeInizioTurno] = GiorniDelMese[i-1].nomeInizioTurno;
 
-            InfoGiornoSingolo[nomeFineTurno] = tConvert(removeLastChar(GiornoPrima.getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].getElementsByClassName("time-location-info")[1].getElementsByTagName("span")[0].innerText));
-            InfoMese[i-1].FineTurno= tConvert('23:59'); //Hack
 
         }
         else if(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].classList.contains("click-area")){
@@ -100,9 +99,9 @@
 
         return {
             'Subject' : row.Subject,
+            'End Date' : row.EndDate,
             'Start Date': row.StartDate,
             "Start Time": row.InizioTurno,
-            'End Date' : row.EndDate,
             "End Time": row.FineTurno,
             "All Day Event": row.TuttoIlGiorno,
             "Location": "",
