@@ -29,6 +29,7 @@
         let InfoGiornoSingolo = {}; //Oggetto da salvare
 
         var nomeData = "StartDate"; //Campo Data
+        var nomeDataFine = "EndDate"; // Campo Fine evento
         var nomeTipo = "Subject"; //Campo tipologia
         var nomeInizioTurno = "InizioTurno"; //campo Inizio Turno
         var nomeFineTurno = "FineTurno"; //Campo Fine Turno
@@ -99,9 +100,10 @@
         return {
             'Subject' : row.Subject,
             'Start Date': row.StartDate,
-            "All Day Event": row.TuttoIlGiorno,
             "Start Time": row.InizioTurno,
+            'End Date' : row.EndDate,
             "End Time": row.FineTurno,
+            "All Day Event": row.TuttoIlGiorno,
             "Location": "",
             "Description":"",
 
