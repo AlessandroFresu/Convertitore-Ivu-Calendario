@@ -55,7 +55,7 @@
             //Imposto l'ora di inizio dormita:
             InfoGiornoSingolo[nomeInizioTurno] = GiorniDelMese[i-1].nomeInizioTurno;
 
-            
+
 
         }
         else if(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].classList.contains("click-area")){
@@ -66,7 +66,7 @@
                 InfoGiornoSingolo[nomeTuttoIlGiono] = "TRUE";
             } else if(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].classList.contains("singleduty")){
                 //Lavoro
-                InfoGiornoSingolo[nomeTipo] = "Lavoro";
+                InfoGiornoSingolo[nomeTipo] = GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName('allocation-info')[0].getElementsByClassName("duty-nr")[0].innerHTML; ;
                 InfoGiornoSingolo[nomeTuttoIlGiono] = "FALSE";
                 //Determino gli orari di inizio e di fine turno
                 InfoGiornoSingolo[nomeInizioTurno] = tConvert(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].getElementsByClassName("time-location-info")[0].getElementsByTagName("span")[0].innerText);
@@ -77,12 +77,7 @@
 
         }
 
-
-
-
-
         //Salvo gli elementi nell'array
-
         InfoMese.push(InfoGiornoSingolo)
     }
 
@@ -93,11 +88,6 @@
     */
 
     const MeseGC = InfoMese.map(function(row) {
-
-        // This function defines the "mapping behaviour". name and title
-        // data from each "row" from your columns array is mapped to a
-        // corresponding item in the new "options" array
-
         return {
             'Subject' : row.Subject,
             'End Date' : row.EndDate,
@@ -107,7 +97,6 @@
             "All Day Event": row.TuttoIlGiorno,
             "Location": "",
             "Description":"",
-
             }
     });
 
