@@ -19,9 +19,9 @@ Si accede agli strumenti sviluppatore del browser, si clicca su "console" e si i
 ## Timeline
 
   > V.a0.01
-   12/08/21 : Prima compilazione funzionante del codice
-  ___
+  >> 12/08/21 : Prima compilazione funzionante del codice
+  
   >> 31/03/22 : Si rimuovono i problemi hardcoded delle dormite
-  ___
+  
   >> 01/04/22 : Vengono inseriti i nomi dei turni
   ___
