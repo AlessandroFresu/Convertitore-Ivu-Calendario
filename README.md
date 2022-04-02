@@ -1,6 +1,6 @@
 # Cosa è IvuToCSV?
 
-IvuToCSV (v.alpha0.01) è uno script che si esegue sulla console da sviluppatore del browser.
+IvuToCSV è uno script che si esegue sulla console da sviluppatore del browser.
 Permette di convertire la pagina "Gestione Operativa" di IVU in un file CSV, denominato "TurniCSV.csv".
 Questo file potrà poi essere importato su una qualsiasi applicazione calendario.
 
@@ -13,7 +13,7 @@ Si accede agli strumenti sviluppatore del browser, si clicca su "console" e si i
 2.	Gli RFR, i giorni di lavoro singoli, i giorni di riposo (indipendentemente dal tipo) vengono associati correttamente **MA** le altre tipologie di giornate (malattia, recupero, festività) non vengono trattate in maniera esplicita il che significa che non verranno inserite nel calendario.
 3.	~~Non vengono inseriti i nomi delle giornate~~
 4.	Codice poco "elegante", ~~presenti dati hardcoded~~.
-6. Segnalate eventuali malfunzionamenti
+
 
 
 ## Timeline
