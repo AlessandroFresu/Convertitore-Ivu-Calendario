@@ -20,8 +20,6 @@ Si accede agli strumenti sviluppatore del browser, si clicca su "console" e si i
 
   > V.a0.01
   >> 12/08/21 : Prima compilazione funzionante del codice
-  
   >> 31/03/22 : Si rimuovono i problemi hardcoded delle dormite
-  
   >> 01/04/22 : Vengono inseriti i nomi dei turni
   ___
