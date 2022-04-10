@@ -1,7 +1,7 @@
 # Cosa è IvuToCSV?
 
-IvuToCSV è uno script che si esegue sulla console da sviluppatore del browser.
-Permette di convertire la pagina "Gestione Operativa" di IVU in un file CSV, denominato "TurniCSV.csv".
+IvuToCSV è uno script di web-scraping eseguito in ambiente locale del browser.
+Permette di convertire la pagina "Gestione Operativa" di IVU in un file CSV (Comma Separated Values), denominato "TurniCSV.csv".
 Questo file potrà poi essere importato su una qualsiasi applicazione calendario.
 
 
@@ -19,9 +19,9 @@ Si accede agli strumenti sviluppatore del browser, si clicca su "console" e si i
 ## Timeline
 
   > V.a0.01
-   12/08/21 : Prima compilazione funzionante del codice
-  ___
+  >>12/08/21 : Prima compilazione funzionante del codice
+  _
   >> 31/03/22 : Si rimuovono i problemi hardcoded delle dormite
-  ___
+  _
   >> 01/04/22 : Vengono inseriti i nomi dei turni
   ___
