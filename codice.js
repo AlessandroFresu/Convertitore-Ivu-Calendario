@@ -1,14 +1,14 @@
 
     function removeLastChar(obj){
-    
+
         return obj.substring(0, obj.length - 1);
-    
+
     };
-    
+
     function tConvert (time) {
         // Check correct time format and split into components
         time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
-      
+
         if (time.length > 1) { // If time format correct
           time = time.slice (1);  // Remove full string match value
           time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
@@ -29,6 +29,7 @@
         let InfoGiornoSingolo = {}; //Oggetto da salvare
 
         var nomeData = "StartDate"; //Campo Data
+        var nomeDataFine = "EndDate"; // Campo Fine evento
         var nomeTipo = "Subject"; //Campo tipologia
         var nomeInizioTurno = "InizioTurno"; //campo Inizio Turno
         var nomeFineTurno = "FineTurno"; //Campo Fine Turno
@@ -38,73 +39,64 @@
 
         //Data della giornata
         InfoGiornoSingolo[nomeData] = GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("day-info")[0].getElementsByClassName("date")[0].innerHTML
-        
+
         //Tipologia giornata
 
         if(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].classList.contains("disable")){
-            InfoGiornoSingolo[nomeTipo] = "Smontante dormita";
-            InfoGiornoSingolo[nomeTuttoIlGiono] = "FALSE";
-            //La dormita inizia alle 00:00 del giorno
-            temp = "00:00 AM"; //HARD CODED
-            InfoGiornoSingolo[nomeInizioTurno] = temp;
-                
-            //INSERIRE ORA DI FINE DORMITA
 
             //Accedo al giorno precedente:
-            var GiornoPrima = GiorniDelMese[i-1];
-            
-            InfoGiornoSingolo[nomeFineTurno] = tConvert(removeLastChar(GiornoPrima.getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].getElementsByClassName("time-location-info")[1].getElementsByTagName("span")[0].innerText));
-            InfoMese[i-1].FineTurno= tConvert('23:59'); //Hack
+            temp = InfoMese[i-1];
+            //Imposto la data di inizio dormita:
+            InfoGiornoSingolo[nomeDataFine] = temp.nomeData;
+            //Imposto la data di fine dormita:
+            temp[nomeDataFine] = InfoGiornoSingolo[nomeData];
+            //Imposto l'ora di fine dormita:
+            temp[nomeFineTurno]= tConvert(removeLastChar(GiorniDelMese[i-1].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].getElementsByClassName("time-location-info")[1].getElementsByTagName("span")[0].innerText));
+            //Imposto l'ora di inizio dormita:
+            InfoGiornoSingolo[nomeInizioTurno] = GiorniDelMese[i-1].nomeInizioTurno;
+
+
 
         }
         else if(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].classList.contains("click-area")){
             //Giorno libero
             if (GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].classList.contains("type_offday")) {
                 InfoGiornoSingolo[nomeTipo] = "Libero";
-                
+                InfoGiornoSingolo[nomeDataFine] = InfoGiornoSingolo[nomeData];
                 InfoGiornoSingolo[nomeTuttoIlGiono] = "TRUE";
             } else if(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].classList.contains("singleduty")){
                 //Lavoro
-                InfoGiornoSingolo[nomeTipo] = "Lavoro";
+                InfoGiornoSingolo[nomeTipo] = GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName('allocation-info')[0].getElementsByClassName("duty-nr")[0].innerHTML; ;
                 InfoGiornoSingolo[nomeTuttoIlGiono] = "FALSE";
                 //Determino gli orari di inizio e di fine turno
-                
                 InfoGiornoSingolo[nomeInizioTurno] = tConvert(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].getElementsByClassName("time-location-info")[0].getElementsByTagName("span")[0].innerText);
                 InfoGiornoSingolo[nomeFineTurno] = tConvert(GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("allocation-container")[0].getElementsByClassName("allocation-info")[0].getElementsByClassName("time-location-info")[1].getElementsByTagName("span")[0].innerText);
+                //Imposto come data di fine dell'evento la stessa data di inzio:
+                InfoGiornoSingolo[nomeDataFine] = GiorniDelMese[i].getElementsByClassName("allocation-day")[0].getElementsByClassName("day-info")[0].getElementsByClassName("date")[0].innerHTML;
             }
 
         }
-        
-
-        
-
 
         //Salvo gli elementi nell'array
-        
         InfoMese.push(InfoGiornoSingolo)
     }
 
-      
+
 
     /*
     * Rimappo l'array in modo da avere i nomi adatti per Google Calendar
     */
 
     const MeseGC = InfoMese.map(function(row) {
-
-        // This function defines the "mapping behaviour". name and title 
-        // data from each "row" from your columns array is mapped to a 
-        // corresponding item in the new "options" array
-    
-        return { 
-            'Subject' : row.Subject, 
+        return {
+            'Subject' : row.Subject,
+            'End Date' : row.EndDate,
             'Start Date': row.StartDate,
-            "All Day Event": row.TuttoIlGiorno,
             "Start Time": row.InizioTurno,
             "End Time": row.FineTurno,
+            "All Day Event": row.TuttoIlGiorno,
             "Location": "",
             "Description":"",
-                
             }
     });
 
@@ -118,7 +110,7 @@
         function arrayToCSV(objArray) {
             const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
             let str = `${Object.keys(array[0]).map(value => `"${value}"`).join(",")}` + '\r\n';
-        
+
             return array.reduce((str, next) => {
                 str += `${Object.values(next).map(value => `"${value}"`).join(",")}` + '\r\n';
                 return str;
